@@ -3,13 +3,14 @@
 
 int main() {
 	auto [client, server] = get_receiver_connection(12345);
-	void *buffer[256];
-	size_t len = receive_data(client, buffer, 255);
+	constexpr size_t buffsize = 8;
+	void *buffer[buffsize];
+	size_t len;
 	do {
+		len = receive_data<buffsize - 1>(client, buffer);
 		((char*)buffer)[len] = '\0';
 		std::cout << (char*)buffer;
-		len = receive_data(client, buffer, 256);
-	} while ((long)len > 0);
+	}while ((long)len > 0);
 	close(client);
 	close(server);
 }

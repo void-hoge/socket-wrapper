@@ -11,7 +11,7 @@ int main() {
 		throw std::runtime_error("Failed to open the file.");
 	}
 	while (true) {
-		long len = receive_data(client, buffer, buffsize);
+		long len = receive_data<buffsize>(client, buffer);
 		if (len <= 0) {
 			break;
 		}

@@ -78,7 +78,7 @@ inline void send_istream(int sock, std::istream& is) {
 	}
 }
 
-inline size_t receive_data(int sock, void *buffer, size_t len) {
+template<size_t len>
+inline size_t receive_data(int sock, void *buffer) {
 	return recv(sock, buffer, len, 0);
 }
-
